@@ -39,7 +39,34 @@ db.once('open', () => {
   console.log('Mongoose connection successful.');
 });
 
-// When you visit this route, the server will scrape data from the site and save it to mongoDB.
+// At this route, server will scrape data from site and save it to mongoDB.
 app.get('/test', (req, res) => {
+  // Send request for website
+  request('https://www.nytimes.com/section/us', (error, res, html) => {
+    // Load html into cheerio and save to $ variable to serve as a shorthand for cheerio's selector commands (similar to the way jQuery works)
+    let $ = cheerio.load(html);
+    // Iterate over each story-link block to retrieve article information
+    $('a.story-link').each( (i, element) => {
+      // Object to hold scraped data
+      let result = {};
+      result.url = $(element).attr('href');
+      result.headline = $(element).find('h2.headline').text().trim();
+      result.summary = $(element).find('p.summary').text().trim();
+      result.byline = $(element).find('p.byline').text().trim();
+      console.log(result);
+      // Using Article model, create a new entry
+      let entry = new Article(result);
+      // Save entry to mongoDB
+      entry.save( (err, doc) => {
+        if (err) throw err;
+        console.log(doc);
+      });
+    });
+  });
+  res.send('Scrape complete.');
+});
 
+// Listen on port 3000
+app.listen(3000, () => {
+  console.log("App running on port 3000!");
 });

@@ -6,6 +6,10 @@ const Schema = mongoose.Schema;
 
 // Define article schema
 const ArticleSchema = new Schema({
+  url: {
+    type: String,
+    required: true
+  },
   headline: {
     type: String,
     required: true
@@ -14,9 +18,9 @@ const ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  url: {
+  byline: {
     type: String,
-    required: true
+    // required: true
   },
   // Link to Remark model
   remark: {

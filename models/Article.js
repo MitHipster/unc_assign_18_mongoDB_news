@@ -20,7 +20,15 @@ const ArticleSchema = new Schema({
   },
   byline: {
     type: String,
-    // required: true
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: String,
+    required: true
   },
   // Link to Remark model
   remark: {

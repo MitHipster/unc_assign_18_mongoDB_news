@@ -39,6 +39,15 @@ db.once('open', () => {
   console.log('Mongoose connection successful.');
 });
 
+// Function to check if object has any empty values
+let hasEmpty = result => {
+  for (let key in result) {
+    if (result[key].length === 0)
+    return true;
+  }
+  return false;
+};
+
 // At this route, server will scrape data from site and save it to mongoDB.
 app.get('/test', (req, res) => {
   // Send request for website
@@ -53,14 +62,17 @@ app.get('/test', (req, res) => {
       result.headline = $(element).find('h2.headline').text().trim();
       result.summary = $(element).find('p.summary').text().trim();
       result.byline = $(element).find('p.byline').text().trim();
-      console.log(result);
-      // Using Article model, create a new entry
-      let entry = new Article(result);
-      // Save entry to mongoDB
-      entry.save( (err, doc) => {
-        if (err) throw err;
-        console.log(doc);
-      });
+      result.image = $(element).find('.wide-thumb img').attr('src');
+      result.date = $(element).parent().siblings('.story-footer').find('.dateline').text().trim();
+      // Call hasEmpty function
+      if (!hasEmpty(result)) {
+        // If no empty values, use Article model to create a new entry
+        let entry = new Article(result);
+        // Save entry to mongoDB
+        entry.save( (err, doc) => {
+          if (err) throw err;
+        });
+      }
     });
   });
   res.send('Scrape complete.');

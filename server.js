@@ -2,6 +2,7 @@
 // Dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 // Require collection models
@@ -38,6 +39,13 @@ db.on('error', error => {
 db.once('open', () => {
   console.log('Mongoose connection successful.');
 });
+
+// Add handlebars engine to express middleware
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  extname: '.hbs'
+}));
+app.set('view engine', 'handlebars');
 
 // Function to check if object has any empty values
 let hasEmpty = result => {

@@ -1,0 +1,9 @@
+<main>
+  {{#each articles}}
+    <h2>{{this.headline}}</h2>
+    <p>{{this.summary}}</p>
+    <p>{{this.byline}}</p>
+    <img src="{{this.link}}" alt="">
+    <p>{{this.date}}</p>
+  {{/each}}
+</main>

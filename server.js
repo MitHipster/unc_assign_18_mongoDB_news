@@ -37,16 +37,16 @@ db.once('open', () => {
 });
 
 // Add handlebars engine to express middleware
-app.engine('handlebars', exphbs({
+app.engine('hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs'
 }));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 
 // Open site at root
 app.use('/', routes);
 
 // Listen on port 3000
 app.listen(3000, () => {
-  console.log("App running on port 3000!");
+  console.log("App running on port 3000.");
 });

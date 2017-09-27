@@ -20,8 +20,17 @@ let hasEmpty = result => {
   return false;
 };
 
+// Route to load unsaved articles when site first loads
+router.get('/', (req, res) => {
+  Article.find({}, (error, doc) => {
+    if (error) throw error;
+    console.log(doc);
+    res.render('index', { content: doc});
+  });
+});
+
 // At this route, server will scrape data from site and save it to mongoDB.
-router.get('/test', (req, res) => {
+router.get('/update', (req, res) => {
   // Send request for website
   request('https://www.nytimes.com/section/us', (error, res, html) => {
     // Load html into cheerio and save to $ variable to serve as a shorthand for cheerio's selector commands (similar to the way jQuery works)
@@ -47,7 +56,7 @@ router.get('/test', (req, res) => {
       }
     });
   });
-  res.send('Scrape complete.');
+  res.render('index complete.');
 });
 
 // Export routes for server.js to use

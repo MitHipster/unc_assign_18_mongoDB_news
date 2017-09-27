@@ -40,11 +40,11 @@ router.get('/update', (req, res) => {
       // Object to hold scraped data
       let result = {};
       result.url = $(element).attr('href');
-      result.headline = $(element).find('h2.headline').text().trim();
-      result.summary = $(element).find('p.summary').text().trim();
-      result.byline = $(element).find('p.byline').text().trim();
+      result.headline = $(element).find('h2.headline').text();
+      result.summary = $(element).find('p.summary').text();
+      result.byline = $(element).find('p.byline').text();
       result.image = $(element).find('.wide-thumb img').attr('src');
-      result.date = $(element).parent().siblings('.story-footer').find('.dateline').text().trim();
+      result.date = $(element).parent().siblings('.story-footer').find('.dateline').text();
       // Call hasEmpty function
       if (!hasEmpty(result)) {
         // If no empty values, use Article model to create a new entry
@@ -56,7 +56,7 @@ router.get('/update', (req, res) => {
       }
     });
   });
-  res.render('index complete.');
+  res.redirect('/');
 });
 
 // Export routes for server.js to use

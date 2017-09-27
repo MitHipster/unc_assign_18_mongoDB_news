@@ -8,10 +8,12 @@ const Schema = mongoose.Schema;
 const RemarkSchema = new Schema({
   title: {
     type: String,
+    trim: true,
     required: true
   },
   comment: {
     type: String,
+    trim: true,
     required: true
   }
 });

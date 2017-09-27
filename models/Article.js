@@ -12,14 +12,17 @@ const ArticleSchema = new Schema({
   },
   headline: {
     type: String,
+    trim: true,
     required: true
   },
   summary: {
     type: String,
+    trim: true,
     required: true
   },
   byline: {
     type: String,
+    trim: true,
     required: true
   },
   image: {
@@ -28,7 +31,13 @@ const ArticleSchema = new Schema({
   },
   date: {
     type: String,
+    trim: true,
     required: true
+  },
+  saved: {
+    type: Boolean,
+    required: true,
+    default: false
   },
   // Link to Remark model
   remark: {

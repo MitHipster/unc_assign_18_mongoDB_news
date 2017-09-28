@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
   url: {
     type: String,
+    unique: true,
     required: true
   },
   headline: {
@@ -30,8 +31,7 @@ const ArticleSchema = new Schema({
     required: true
   },
   date: {
-    type: String,
-    trim: true,
+    type: Date,
     required: true
   },
   saved: {

@@ -22,7 +22,9 @@ let hasEmpty = result => {
 
 // Route to load unsaved articles when site first loads
 router.get('/', (req, res) => {
-  Article.find({}, (error, doc) => {
+  Article.find({ saved: false })
+  .sort({ date: -1 })
+  .exec( (error, doc) => {
     if (error) throw error;
     console.log(doc);
     res.render('index', { content: doc});
@@ -36,7 +38,7 @@ router.get('/update', (req, res) => {
     // Load html into cheerio and save to $ variable to serve as a shorthand for cheerio's selector commands (similar to the way jQuery works)
     let $ = cheerio.load(html);
     // Iterate over each story-link block to retrieve article information
-    $('a.story-link').each( (i, element) => {
+    $('#latest-panel a.story-link').each( (i, element) => {
       // Object to hold scraped data
       let result = {};
       result.url = $(element).attr('href');
@@ -44,14 +46,14 @@ router.get('/update', (req, res) => {
       result.summary = $(element).find('p.summary').text();
       result.byline = $(element).find('p.byline').text();
       result.image = $(element).find('.wide-thumb img').attr('src');
-      result.date = $(element).parent().siblings('.story-footer').find('.dateline').text();
+      result.date = $(element).parent().siblings('.story-footer').find('.dateline').attr('datetime');
       // Call hasEmpty function
       if (!hasEmpty(result)) {
         // If no empty values, use Article model to create a new entry
         let entry = new Article(result);
         // Save entry to mongoDB
         entry.save( (err, doc) => {
-          if (err) throw err;
+          if (err && err.code !== 11000) throw err;
         });
       }
     });

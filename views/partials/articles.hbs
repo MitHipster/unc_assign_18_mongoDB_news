@@ -1,9 +1,16 @@
 <main>
-  {{#each articles}}
-    <h2>{{this.headline}}</h2>
-    <p>{{this.summary}}</p>
-    <p>{{this.byline}}</p>
-    <img src="{{this.link}}" alt="">
-    <p>{{this.date}}</p>
-  {{/each}}
+
+  <a href="/update">Update Articles</a>
+  <ul>
+    {{#each articles}}
+      <li>
+        <h2>{{this.headline}}</h2>
+        <p>{{this.summary}}</p>
+        <p>{{this.byline}}</p>
+        <img src="{{this.image}}" alt="">
+        <p>{{this.date}}</p>
+        <a href="/saved/{{this._id}}">Save Article</a>
+      </li>
+    {{/each}}
+  </ul>
 </main>

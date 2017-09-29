@@ -21,20 +21,19 @@ let hasEmpty = result => {
 };
 
 // Route to load unsaved articles when site first loads
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Article.find({ saved: false })
   .sort({ date: -1 })
-  .exec( (error, doc) => {
-    if (error) throw error;
-    console.log(doc);
-    res.render('index', { content: doc});
+  .exec((err, data) => {
+    if (err) throw err;
+    res.render('index', { content: data });
   });
 });
 
 // At this route, server will scrape data from site and save it to mongoDB.
-router.get('/update', (req, res) => {
+router.get('/update', (req, res, next) => {
   // Send request for website
-  request('https://www.nytimes.com/section/us', (error, res, html) => {
+  request('https://www.nytimes.com/section/us', (error, response, html) => {
     // Load html into cheerio and save to $ variable to serve as a shorthand for cheerio's selector commands (similar to the way jQuery works)
     let $ = cheerio.load(html);
     // Iterate over each story-link block to retrieve article information
@@ -57,8 +56,17 @@ router.get('/update', (req, res) => {
         });
       }
     });
+    res.redirect('/');
   });
-  res.redirect('/');
+});
+
+// Dynamic route used to save articles
+router.get('/saved/:id', (req, res) => {
+  Article.findByIdAndUpdate(req.params.id, {$set: { saved: true }})
+  .exec( (err, doc) => {
+    if (err) throw err;
+    res.redirect('/');
+  });
 });
 
 // Export routes for server.js to use

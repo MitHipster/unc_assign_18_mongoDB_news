@@ -40,7 +40,7 @@ const ArticleSchema = new Schema({
     default: false
   },
   // Link to Remark model
-  remark: {
+  remarks: {
     type: Schema.Types.ObjectId,
     ref: 'Remark'
   }

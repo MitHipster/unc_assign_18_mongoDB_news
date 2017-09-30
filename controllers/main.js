@@ -26,7 +26,27 @@ router.get('/', (req, res, next) => {
   .sort({ date: -1 })
   .exec((err, data) => {
     if (err) throw err;
-    res.render('index', { content: data });
+    res.render('index', {
+      content: {
+        saved: false,
+        data: data
+      }
+    });
+  });
+});
+
+router.get('/saved', (req, res, next) => {
+  Article.find({ saved: true })
+  .sort({ date: -1 })
+  .exec((err, data) => {
+    if (err) throw err;
+    console.log(data);
+    res.render('index', {
+      content: {
+        saved: true,
+        data: data
+      }
+    });
   });
 });
 
@@ -45,13 +65,13 @@ router.get('/update', (req, res, next) => {
       result.summary = $(element).find('p.summary').text();
       result.byline = $(element).find('p.byline').text();
       result.image = $(element).find('.wide-thumb img').attr('src');
-      result.date = $(element).parent().siblings('.story-footer').find('.dateline').attr('datetime');
+      result.date = $(element).parent().siblings('.story-footer').find('.dateline').attr('datetime') + 'T12:00:00.000Z';
       // Call hasEmpty function
       if (!hasEmpty(result)) {
         // If no empty values, use Article model to create a new entry
         let entry = new Article(result);
         // Save entry to mongoDB
-        entry.save( (err, doc) => {
+        entry.save( (err, data) => {
           if (err && err.code !== 11000) throw err;
         });
       }
@@ -63,9 +83,21 @@ router.get('/update', (req, res, next) => {
 // Dynamic route used to save articles
 router.get('/saved/:id', (req, res) => {
   Article.findByIdAndUpdate(req.params.id, {$set: { saved: true }})
-  .exec( (err, doc) => {
+  .exec( (err, data) => {
     if (err) throw err;
     res.redirect('/');
+  });
+});
+
+router.post('/notes/:id', (req, res) => {
+  let entry = new Remark(req.body);
+  entry.save( (err, data) => {
+    if (err) throw err;
+    Article.findByIdAndUpdate(req.params.id, {$push: { 'remarks': data._id }}, { new: true })
+    .exec( (err, data) => {
+      if (err) throw err;
+      res.redirect('/');
+    });
   });
 });
 

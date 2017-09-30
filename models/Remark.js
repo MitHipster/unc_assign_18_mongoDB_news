@@ -15,6 +15,11 @@ const RemarkSchema = new Schema({
     type: String,
     trim: true,
     required: true
+  },
+  date: {
+    type: Date,
+    required: true,
+    default: Date.now
   }
 });
 

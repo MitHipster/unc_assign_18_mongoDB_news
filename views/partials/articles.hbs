@@ -1,16 +1,41 @@
 <main>
-
-  <a href="/update">Update Articles</a>
+  {{#if articles.saved}}
+    <a href="/">Home</a>
+    <a href="/update">Update Articles</a>
+  {{/if}}
+  {{#unless articles.saved}}
+    <a href="/saved">Saved Articles</a>
+  {{/unless}}
   <ul>
-    {{#each articles}}
+    {{#each articles.data}}
       <li>
         <h2>{{this.headline}}</h2>
         <p>{{this.summary}}</p>
         <p>{{this.byline}}</p>
         <img src="{{this.image}}" alt="">
         <p>{{this.date}}</p>
-        <a href="/saved/{{this._id}}">Save Article</a>
+        {{#if this.saved}}
+          <a href="/removed">Remove Articles</a>
+        {{/if}}
+        {{#unless this.saved}}
+          <a href="/saved/{{this._id}}">Save Article</a>
+        {{/unless}}
       </li>
+      {{#if this.saved}}
+        <form action="/notes/{{this._id}}" method="post">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="title" type="text" class="validate" name="title" required>
+              <label for="title">Title</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea id="comment" class="materialize-textarea validate" name="comment" required></textarea>
+              <label for="comment">Comment</label>
+            </div>
+            <button class="btn add-comment" type="submit" data-id="{{this._id}}">Submit</button>
+          </div>
+        </form>
+      {{/if}}
     {{/each}}
   </ul>
 </main>

@@ -15,7 +15,7 @@
         <img src="{{this.image}}" alt="">
         <p>{{this.date}}</p>
         {{#if this.saved}}
-          <a href="/removed">Remove Articles</a>
+          <a href="/removed/{{this._id}}">Remove Articles</a>
         {{/if}}
         {{#unless this.saved}}
           <a href="/saved/{{this._id}}">Save Article</a>

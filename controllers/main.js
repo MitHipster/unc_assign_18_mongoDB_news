@@ -35,21 +35,6 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.get('/saved', (req, res, next) => {
-  Article.find({ saved: true })
-  .sort({ date: -1 })
-  .exec((err, data) => {
-    if (err) throw err;
-    console.log(data);
-    res.render('index', {
-      content: {
-        saved: true,
-        data: data
-      }
-    });
-  });
-});
-
 // At this route, server will scrape data from site and save it to mongoDB.
 router.get('/update', (req, res, next) => {
   // Send request for website
@@ -80,6 +65,21 @@ router.get('/update', (req, res, next) => {
   });
 });
 
+router.get('/saved', (req, res, next) => {
+  Article.find({ saved: true })
+  .sort({ date: -1 })
+  .exec((err, data) => {
+    if (err) throw err;
+    console.log(data);
+    res.render('index', {
+      content: {
+        saved: true,
+        data: data
+      }
+    });
+  });
+});
+
 // Dynamic route used to save articles
 router.get('/saved/:id', (req, res) => {
   Article.findByIdAndUpdate(req.params.id, {$set: { saved: true }})
@@ -96,8 +96,16 @@ router.post('/notes/:id', (req, res) => {
     Article.findByIdAndUpdate(req.params.id, {$push: { 'remarks': data._id }}, { new: true })
     .exec( (err, data) => {
       if (err) throw err;
-      res.redirect('/');
+      res.redirect('/saved');
     });
+  });
+});
+
+router.get('/removed/:id', (req, res) => {
+  Article.findByIdAndRemove(req.params.id)
+  .exec( (err, data) => {
+    if (err) throw err;
+    res.redirect('/saved');
   });
 });
 

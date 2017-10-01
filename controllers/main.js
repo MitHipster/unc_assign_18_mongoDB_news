@@ -70,7 +70,6 @@ router.get('/saved', (req, res, next) => {
   .sort({ date: -1 })
   .exec((err, data) => {
     if (err) throw err;
-    console.log(data);
     res.render('index', {
       content: {
         saved: true,
@@ -82,8 +81,7 @@ router.get('/saved', (req, res, next) => {
 
 // Dynamic route used to save articles
 router.get('/saved/:id', (req, res) => {
-  Article.findByIdAndUpdate(req.params.id, {$set: { saved: true }})
-  .exec( (err, data) => {
+  Article.findByIdAndUpdate(req.params.id, {$set: { saved: true }}, (err, data) => {
     if (err) throw err;
     res.redirect('/');
   });
@@ -102,10 +100,13 @@ router.post('/notes/:id', (req, res) => {
 });
 
 router.get('/removed/:id', (req, res) => {
-  Article.findByIdAndRemove(req.params.id)
-  .exec( (err, data) => {
-    if (err) throw err;
+  Article.findByIdAndRemove(req.params.id).exec()
+  .then( data => {
+    Remark.remove({ '_id': {$in: data.remarks }}).exec();
+  }).then( () => {
     res.redirect('/saved');
+  }).catch( err => {
+    if (err) throw err;
   });
 });
 

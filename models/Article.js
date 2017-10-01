@@ -40,10 +40,10 @@ const ArticleSchema = new Schema({
     default: false
   },
   // Link to Remark model
-  remarks: {
+  remarks: [{
     type: Schema.Types.ObjectId,
     ref: 'Remark'
-  }
+  }]
 });
 
 // Create model with schema

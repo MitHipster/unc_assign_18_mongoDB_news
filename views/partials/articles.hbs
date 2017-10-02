@@ -1,12 +1,15 @@
 <main>
-  <ul>
+  <img class="responsive-img" src="assets/img/panel.jpg">
+  <ul class="container">
     {{#each articles.data}}
-      <li>
-        <h2>{{this.headline}}</h2>
-        <p>{{this.summary}}</p>
-        <p>{{this.byline}}</p>
-        <img src="{{this.image}}" alt="">
-        <p>{{this.date}}</p>
+      <li class="collection-item avatar">
+        <img src="{{this.image}}" alt="" class="">
+        <span class="title">{{this.headline}}</span>
+        <p>{{this.summary}}<br>
+           {{this.byline}}<br>
+           {{this.date}}
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
         {{#if this.saved}}
           <a href="/removed/{{this._id}}">Remove Articles</a>
         {{/if}}

@@ -9,4 +9,12 @@ $(document).ready(function () {
   // Initialize modal for adding remarks
   // Modal can be dismissed by clicking outside of the modal
   $('.modal').modal({ dismissible: true });
+  // Set action attribute on form when add comment button is clicked
+  $('.modal-trigger').click( (e) => {
+    let id = $(e.target).data('id');
+    console.log(id);
+    console.log($("#comment-form").attr('action'));
+    $("#comment-form").attr('action', '/notes/' + id);
+    console.log($("#comment-form").attr('action'));
+  });
 });

@@ -1,11 +1,10 @@
-<div id="comment-modal" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Modal Header</h4>
-    <p>A bunch of text</p>
-    {{#if this.saved}}
-    <form action="/notes/{{this._id}}" method="post" style="display: none">
+<div id="comment-modal" class="modal">
+  <div class="modal-content container">
+    <h4>Add Comment</h4>
+    <p>Share your thoughts about the article, writer, etc.</p>
+    <form id="comment-form" action="" method="post">
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12">
           <input id="title" type="text" class="validate" name="title" required>
           <label for="title">Title</label>
         </div>
@@ -13,12 +12,10 @@
           <textarea id="comment" class="materialize-textarea validate" name="comment" required></textarea>
           <label for="comment">Comment</label>
         </div>
-        <button class="btn add-comment" type="submit" data-id="{{this._id}}">Submit</button>
+      </div>
+      <div class="modal-footer">
+        <button class="btn add-comment" type="submit">Submit</button>
       </div>
     </form>
-    {{/if}}
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
   </div>
 </div>

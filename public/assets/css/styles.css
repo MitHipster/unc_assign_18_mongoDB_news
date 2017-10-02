@@ -26,12 +26,6 @@ main {
   margin-right: 16px;
 }
 
-@media only screen and (max-width: 400px) {
-  nav .brand-logo {
-    font-size: 1.7rem;
-  }
-}
-
 /* Articles */
 .collection .collection-item.avatar {
   padding: 20px;
@@ -58,11 +52,12 @@ main {
 }
 
 .fixed-action-btn.horizontal ul {
-  top: 40%;
+  top: 44.5%;
   right: 50px;
 }
 
 @media only screen and (min-width: 720px) {
+  /* Articles */
   .collection .collection-item.avatar {
     display: flex;
   }
@@ -74,5 +69,27 @@ main {
 
   .collection-text {
     padding-right: 48px;
+  }
+
+  .fixed-action-btn.horizontal ul {
+    top: 40%;
+    right: 50px;
+  }
+
+  /* Modal */
+  .modal-content.container {
+    padding-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  /* Navigation */
+  nav .brand-logo {
+    font-size: 1.7rem;
+  }
+
+  /* Modal */
+  .modal-content h4 {
+    font-size: 2rem;
   }
 }

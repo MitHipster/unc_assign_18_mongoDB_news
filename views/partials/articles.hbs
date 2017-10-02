@@ -1,11 +1,4 @@
 <main>
-  {{#if articles.saved}}
-    <a href="/">Home</a>
-  {{/if}}
-  {{#unless articles.saved}}
-    <a href="/update">Update Articles</a>
-    <a href="/saved">Saved Articles</a>
-  {{/unless}}
   <ul>
     {{#each articles.data}}
       <li>

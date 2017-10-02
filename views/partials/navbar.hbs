@@ -1,0 +1,30 @@
+<header>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">News Monger</a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          {{#if articles.saved}}
+            <a href="/">Home</a>
+          {{/if}}
+          {{#unless articles.saved}}
+            <a href="/update">Update Articles</a>
+            <a href="/saved">Saved Articles</a>
+          {{/unless}}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <ul class="side-nav" id="mobile-menu">
+    <h5 class="side-navbar-title">Menu</h5>
+    <hr>
+    {{#if articles.saved}}
+      <li><a href="/"><i class="material-icons">home</i>Home</a></li>
+    {{/if}}
+    {{#unless articles.saved}}
+      <li><a href="/update"><i class="material-icons">file_download</i>Update Articles</a></li>
+      <li><a href="/saved"><i class="material-icons">save</i>Saved Articles</a></li>
+    {{/unless}}
+  </ul>
+</header>

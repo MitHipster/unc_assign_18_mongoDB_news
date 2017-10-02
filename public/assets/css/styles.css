@@ -1,0 +1,29 @@
+/* Sticky footer */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Archivo', sans-serif;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* Global styles */
+
+
+/* Navigation */
+.side-navbar-title {
+  margin-left: 1.25rem;
+}
+
+.side-nav li > a > i.material-icons {
+  margin-right: 16px;
+}
+
+@media only screen and (max-width: 400px) {
+  nav .brand-logo {
+    font-size: 1.7rem;
+  }
+}

@@ -4,6 +4,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family: 'Archivo', sans-serif;
+  color: #212121;
 }
 
 main {
@@ -11,7 +12,10 @@ main {
 }
 
 /* Global styles */
-
+.containers {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
 
 /* Navigation */
 .side-navbar-title {
@@ -25,5 +29,50 @@ main {
 @media only screen and (max-width: 400px) {
   nav .brand-logo {
     font-size: 1.7rem;
+  }
+}
+
+/* Articles */
+.collection .collection-item.avatar {
+  padding: 20px;
+}
+
+.collection .collection-item.avatar .title {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.collection .collection-byline,
+.collection .collection-date {
+  display: inline-block;
+  line-height: 1.4rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: #757575;
+}
+
+.collection .collection-byline {
+  margin-top: 8px;
+}
+
+.fixed-action-btn.horizontal ul {
+  top: 40%;
+  right: 50px;
+}
+
+@media only screen and (min-width: 720px) {
+  .collection .collection-item.avatar {
+    display: flex;
+  }
+
+  .collection .collection-item.avatar img {
+    max-height: 140px;
+    margin-right: 16px;
+  }
+
+  .collection-text {
+    padding-right: 48px;
   }
 }

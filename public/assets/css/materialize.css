@@ -3374,14 +3374,14 @@ nav ul a span.badge {
 @media only screen and (min-width: 601px) {
   .container {
     /*width: 85%;*/
-    width: 90%;
+    width: 87.5%;
   }
 }
 
 @media only screen and (min-width: 993px) {
   .container {
     /*width: 70%;*/
-    width: 80%;
+    width: 82.5%;
   }
 }
 
@@ -4403,7 +4403,8 @@ nav .input-field label.active i {
 .navbar-fixed {
   position: relative;
   height: 56px;
-  z-index: 997;
+  /*z-index: 997;*/
+  z-index: 998;
 }
 
 .navbar-fixed nav {

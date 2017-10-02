@@ -6,11 +6,11 @@
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           {{#if articles.saved}}
-            <a href="/">Home</a>
+            <li><a href="/">Home</a></li>
           {{/if}}
           {{#unless articles.saved}}
-            <a href="/update">Update Articles</a>
-            <a href="/saved">Saved Articles</a>
+            <li><a href="/update">Update Articles</a></li>
+            <li><a href="/saved">Saved Articles</a></li>
           {{/unless}}
         </ul>
       </div>

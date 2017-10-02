@@ -5,4 +5,8 @@ $(document).ready(function () {
     menuWidth: 250,
     closeOnClick: true
   });
+
+  // Initialize modal for adding remarks
+  // Modal can be dismissed by clicking outside of the modal
+  $('.modal').modal({ dismissible: true });
 });

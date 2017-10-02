@@ -1,37 +1,33 @@
 <main>
   <img class="responsive-img" src="assets/img/panel.jpg">
-  <ul class="container">
-    {{#each articles.data}}
-      <li class="collection-item avatar">
-        <img src="{{this.image}}" alt="" class="">
-        <span class="title">{{this.headline}}</span>
-        <p>{{this.summary}}<br>
-           {{this.byline}}<br>
-           {{this.date}}
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-        {{#if this.saved}}
-          <a href="/removed/{{this._id}}">Remove Articles</a>
-        {{/if}}
-        {{#unless this.saved}}
-          <a href="/saved/{{this._id}}">Save Article</a>
-        {{/unless}}
-      </li>
-      {{#if this.saved}}
-        <form action="/notes/{{this._id}}" method="post">
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="title" type="text" class="validate" name="title" required>
-              <label for="title">Title</label>
-            </div>
-            <div class="input-field col s12">
-              <textarea id="comment" class="materialize-textarea validate" name="comment" required></textarea>
-              <label for="comment">Comment</label>
-            </div>
-            <button class="btn add-comment" type="submit" data-id="{{this._id}}">Submit</button>
+  <div class="container containers">
+    <ul class="collection">
+      {{#each articles.data}}
+        <li class="collection-item avatar">
+          <img class="responsive-img" src="{{this.image}}" alt="" class="">
+          <div class="collection-text">
+            <span class="title">{{this.headline}}</span>
+            <p>{{this.summary}}<br>
+            <span class="collection-byline">{{this.byline}}</span><br>
+            <span class="collection-date">{{dateFormat this.date}}</span>
+            </p>
           </div>
-        </form>
-      {{/if}}
-    {{/each}}
-  </ul>
+          {{#if this.saved}}
+            <div class="fixed-action-btn horizontal secondary-content">
+              <a class="btn-floating blue">
+                <i class="large material-icons">menu</i>
+              </a>
+              <ul>
+                <li><a href="/removed/{{this._id}}" class="btn-floating red"><i class="material-icons">remove</i></a></li>
+                <li><a href="#comment-modal" class="btn-floating green modal-trigger"><i class="material-icons">create</i></a></li>
+              </ul>
+            </div>
+          {{/if}}
+          {{#unless this.saved}}
+            <a href="/saved/{{this._id}}" class="btn btn-floating waves-effect waves-light green secondary-content"><i class="material-icons">add</i></a>
+          {{/unless}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
 </main>

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const moment = require('moment');
 const routes = require('./controllers/main.js');
 
 // Set mongoose to leverage built in ES6 Promises
@@ -36,12 +37,27 @@ db.once('open', () => {
   console.log('Mongoose connection successful.');
 });
 
-// Add handlebars engine to express middleware
-app.engine('hbs', exphbs({
+// Define and register handlebar helper functions
+let hbs = exphbs.create({
+  helpers: {
+    dateFormat: (value) => {
+      return moment(value).format('MMM. Do, YYYY');
+    }
+  },
   defaultLayout: 'main',
   extname: '.hbs'
-}));
+});
+
+// Add handlebars engine to express middleware
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+// Add handlebars engine to express middleware
+// app.engine('hbs', exphbs({
+//   defaultLayout: 'main',
+//   extname: '.hbs'
+// }));
+// app.set('view engine', 'hbs');
 
 // Open site at root
 app.use('/', routes);

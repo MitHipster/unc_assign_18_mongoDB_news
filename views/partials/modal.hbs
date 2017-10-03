@@ -28,10 +28,12 @@
           <p>{{this.comment}}</p>
           <p class="comment-date right-align">{{dateFormat this.date "dateTime"}}</p>
           <hr>
+        {{else}}
+          <p>There are no comments on this article. Go ahead and add one.</p>
         {{/each}}
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
       </div>
     </div>
   {{/if}}

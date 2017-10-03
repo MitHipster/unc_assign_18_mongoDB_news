@@ -9,7 +9,7 @@
             <a href="{{this.url}}" target="_blank"><span class="title">{{this.headline}}</span></a>
             <p>{{this.summary}}<br>
             <span class="collection-byline">{{this.byline}}</span><br>
-            <span class="collection-date">{{dateFormat this.date}}</span>
+            <span class="collection-date">{{dateFormat this.date "dateOnly"}}</span>
             </p>
           </div>
           {{#if this.saved}}
@@ -20,6 +20,7 @@
               <ul>
                 <li><a href="/removed/{{this._id}}" class="btn-floating red"><i class="material-icons" title="Delete article">remove</i></a></li>
                 <li><a href="#add-comment-modal" class="btn-floating green modal-trigger" title="Add comment"><i class="material-icons" data-id="{{this._id}}">create</i></a></li>
+                <li><a href="#comments-modal-{{this._id}}" class="btn-floating yellow darken-2 modal-trigger" title="View comments"><i class="material-icons">visibility</i></a></li>
               </ul>
             </div>
           {{/if}}

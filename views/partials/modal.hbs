@@ -19,3 +19,20 @@
     </form>
   </div>
 </div>
+{{#each articles.data}}
+  {{#if this.saved}}
+    <div id="comments-modal-{{this._id}}" class="modal">
+      <div class="modal-content container">
+        {{#each this.remarks}}
+          <h5 class="comment-title"><i class="material-icons">chevron_right</i>{{this.title}}</h5>
+          <p>{{this.comment}}</p>
+          <p class="comment-date right-align">{{dateFormat this.date "dateTime"}}</p>
+          <hr>
+        {{/each}}
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+  {{/if}}
+{{/each}}

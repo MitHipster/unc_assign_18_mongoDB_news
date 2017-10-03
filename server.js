@@ -40,8 +40,12 @@ db.once('open', () => {
 // Define and register handlebar helper functions
 let hbs = exphbs.create({
   helpers: {
-    dateFormat: (value) => {
-      return moment(value).format('MMM. Do, YYYY');
+    dateFormat: (value, format) => {
+      if (format === "dateOnly") {
+        return moment(value).format('MMM D, YYYY');
+      } else {
+        return moment(value).format('MMM D, YYYY h:mm a');
+      }
     }
   },
   defaultLayout: 'main',
@@ -51,13 +55,6 @@ let hbs = exphbs.create({
 // Add handlebars engine to express middleware
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-
-// Add handlebars engine to express middleware
-// app.engine('hbs', exphbs({
-//   defaultLayout: 'main',
-//   extname: '.hbs'
-// }));
-// app.set('view engine', 'hbs');
 
 // Open site at root
 app.use('/', routes);

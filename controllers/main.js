@@ -68,8 +68,11 @@ router.get('/update', (req, res, next) => {
 router.get('/saved', (req, res, next) => {
   Article.find({ saved: true })
   .sort({ date: -1 })
+  // Populate all of the notes associated with saved articles
+  .populate('remarks')
   .exec((err, data) => {
     if (err) throw err;
+    console.log(data);
     res.render('index', {
       content: {
         saved: true,

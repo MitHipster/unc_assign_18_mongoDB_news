@@ -72,7 +72,6 @@ router.get('/saved', (req, res, next) => {
   .populate('remarks')
   .exec((err, data) => {
     if (err) throw err;
-    console.log(data);
     res.render('index', {
       content: {
         saved: true,

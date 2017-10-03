@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const routes = require('./controllers/main.js');
 
+const PORT = process.env.PORT || 3000;
+
 // Set mongoose to leverage built in ES6 Promises
 mongoose.Promise = Promise;
 
@@ -60,6 +62,6 @@ app.set('view engine', 'hbs');
 app.use('/', routes);
 
 // Listen on port 3000
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("App running on port 3000.");
 });

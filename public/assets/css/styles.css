@@ -58,8 +58,13 @@ main {
 }
 
 .fixed-action-btn.horizontal ul {
-  top: 44.5%;
+  top: 44%;
   right: 50px;
+  margin-top: 4px;
+}
+
+.no-saved-articles {
+  padding: 0 8px;
 }
 
 /* Comment modal */
@@ -97,13 +102,18 @@ main {
   }
 
   .fixed-action-btn.horizontal ul {
-    top: 40%;
-    right: 50px;
+    top: 39%;
   }
 
   /* Modal */
   .modal-content.container {
     padding-top: 30px;
+  }
+}
+
+@media only screen and (min-width: 880px) {
+  .fixed-action-btn.horizontal ul {
+    top: 37%;
   }
 }
 

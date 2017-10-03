@@ -30,6 +30,8 @@
             <a href="/saved/{{this._id}}" class="btn btn-floating waves-effect grey darken-1 secondary-content"><i class="material-icons" title="Add article">add</i></a>
           {{/unless}}
         </li>
+      {{else}}
+        <p class="no-saved-articles">There are no articles saved at this time. Return to the home page and add some to this collection.</p>
       {{/each}}
     </ul>
   </div>

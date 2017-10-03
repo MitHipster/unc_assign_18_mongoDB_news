@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('public'));
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/headlinesDb');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/headlinesDb');
 const db = mongoose.connection;
 
 // Show any mongoose connection errors
